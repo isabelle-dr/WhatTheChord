@@ -10,7 +10,7 @@ PRED_DIR = os.path.join(ROOT_DIR, 'prediction')
 MODEL_H5 = os.path.join(ROOT_DIR, 'final_model.h5')
 LE = os.path.join(ROOT_DIR, 'labelencoder.sav')
 
-OUT_DIR = os.path.join(ROOT_DIR, 'output/')
+OUT_DIR = os.path.join(ROOT_DIR, 'streamlit/')
 RECORDING_DIR = os.path.join(OUT_DIR, 'recording')
 IMAGE_DIR = os.path.join(OUT_DIR, 'images')
 
