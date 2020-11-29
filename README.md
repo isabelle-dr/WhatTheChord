@@ -61,7 +61,7 @@ I used a CNN
 - run extract_features.py
 
 # To make predicitons
-The model is trained on samples from audio data containing only one chord. The notes don't have to be played simultaneously :)
-Put an audio file (.wav or .mp3 in the prediction folder)
-Call python -W ignore app.py in your terminal. (the W - ignore is here so that the warnings aren't being printed out)
+The model is trained on samples from audio data containing only one chord. The notes don't have to be played simultaneously :)\
+Put an audio file (.wav or .mp3 in the prediction folder)\
+Call python -W ignore app.py in your terminal. (the W - ignore is here so that the warnings aren't being printed out)\
 Make sure you are located in the folder containing the app.py file and the prediction folder
