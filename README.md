@@ -54,14 +54,26 @@ I used CENS : Chroma Energy Normalized using Librosa
 ## The model
 I used a CNN
 
-# To run the whole project
+# To run the whole project - do I need this here?
 - Install requirements.txt
 - Dowbload the audio data in a folder called audio
 - Download the annotations data in a folder called annotation
 - run extract_features.py
 
 # To make predicitons
+Clone this repo\
+``
+$ git clone https://github.com/Isabelle-Dr/Chord-predictor
+$ cd Chord-predictor
+``
+
+Install requirements.txt\
+``
+pip install -r requirements.txt
+``
+
 The model is trained on samples from audio data containing only one chord. The notes don't have to be played simultaneously :)\
-Put an audio file (.wav or .mp3 in the prediction folder)\
+Put an audio file of your choice in the prediction folder (.wav or .mp3 in the prediction folder)\
 Call python -W ignore app.py in your terminal. (the W - ignore is here so that the warnings aren't being printed out)\
 Make sure you are located in the folder containing the app.py file and the prediction folder
+In the prediciton folder, you'll also see the chromagram image of your song!
