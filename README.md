@@ -73,7 +73,7 @@ pip install -r requirements.txt
 ``
 
 The model is trained on samples from audio data containing only one chord. The notes don't have to be played simultaneously :)\
-Put an audio file of your choice in the prediction folder (.wav or .mp3 in the prediction folder)\
+Put an audio file of your choice in the prediction folder (.wav or .m4a are working)\
 Call the following command
 ``python -W ignore app.py <filename>`` in your terminal. (the W - ignore is here so that the warnings aren't being printed out)\
 replace <filename> with the name of your file including the extension ex: audio_sample.wav
