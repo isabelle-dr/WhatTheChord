@@ -75,7 +75,7 @@ def display(file):
 
     
 def main():
-    title = "Guitar Chord Recognition"
+    title = "What the chord"
     st.title(title)
     
     # upload file - working!
