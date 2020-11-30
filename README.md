@@ -3,9 +3,15 @@ Chord predictor using a CNN on choma vectors
 
 
 ## About the project
+This project was part of LighthouseLabs data science bootcamp and took two weeks to complete. It consisted of:
+- research on audio transformations
+- get a dataset: (I used the [guitarset dataset](https://zenodo.org/record/1492449#.X8QhCGhKhPY)) 
 - feature extraction of chromagrams from audio data
 - train deep learning model
-- make prediction on a new audio sample
+- make prediction on a new audio sample: using the command line or through a streamlit web app.
+
+I ended up an accuracy of 80% which is acceptable for the scope of the project. I was using data containing 42 labels with a high class imbalance, with audio files varying a lot around the 'root' chord. I'm planning on tuning the model to reach a higher accuracy :)
+The goal of this project is more to build an MVP model from start to finish using all steps of a data science project, and use this model for prediction smoothly. 
 
 ### The chords
 The data is composed of 180 audio samples containing the following chords:
@@ -53,23 +59,24 @@ The data is composed of 180 audio samples containing the following chords:
 41  --> G:min\
 
 ### The data
-Guitarset dataset
+This dataset consists of 360 audio files of approx. 30sec and annotations about the chord instructed to the player as well as the chord played (it differs slightly since the musicians had some leeway to fit a speicif music style.
+The dataset is composed of 180 tracks, each having one 'comp' audio file and one 'solo' audio file. I took only the 'comp' in this project to get cleaner images and because the musicians didn't go too far from what was instructed.
 
 ### The images
 I used chomagrams CENS : Chroma Energy Normalized using Librosa
 
 ## The model
-I used a CNN
+ I used a CNN
 
 # Make a prediction
+## Using the command line
 The model is trained on samples from audio data containing only one chord. The notes don't have to be played simultaneously :)\
-Call python -W ignore app.py in your terminal. (the W - ignore is here so that the warnings aren't being printed out)\
 Make sure you are located in the folder containing the app.py file and the prediction folder
 
 - Clone this repo\
 ``
-$ git clone https://github.com/Isabelle-Dr/what-the-chord.git
-$ cd what-the-chord
+$ git clone https://github.com/Isabelle-Dr/WhatTheChord.git
+$ cd WhatTheChord
 ``
 - Install virtual environment using pip, activate it and install requirements.txt\
 ``
@@ -79,7 +86,7 @@ $ source .venv/bin/activate
 $ pip install -r requirements.txt
 ``
 - Make a prediction from the command line
-Put the audio files you want to predict in the `prediction` folder (.wav or .mp3). Then, run this command from the comand line. \
+Create a folder called `prediction` in the repo and put the audio files you want to predict in the `prediction` folder (.wav or .mp3). Then, run this command from the comand line. \
 
 ``
 $ python -W ignore app.py <yourfilename.wav>
@@ -89,6 +96,8 @@ The `W - ignore` is here so that the warnings aren't being printed out, it makes
 Make sure you're situated in the `what-the-chord`directory.\
 
 - That's it! You'll see the predicted chord right after this command :) In the prediciton folder, you'll also see the chromagram image of your song!
+
+## Using the Streamlit app
 
 # Build the project from the source
 - Clone this repo\
@@ -103,11 +112,23 @@ $ virtualenv .venv
 $ source .venv/bin/activate
 $ pip install -r requirements.txt
 ``
-- Create three folders in the directory: `data`, `annotation`, `images`.
+- Create three folders in the directory: `audio`, `annotation`, `images`, `labels`, `prediction`
+Your repo folder should have this structure
+├── WhatTheChord/
+|           ├── annotation/
+|           ├── audio/
+|           ├── images/
+|           ├── labels/
+|           ├── prediction/
+|           ├── app.py
+|           ├── data_extraction.py
+|           ├── final_model.h5
+|           ├── labelencoder.sav
+|           ├── modeling.py
+|           └── requirements.txt
 
-- Dowbload the [guitarset dataset](https://zenodo.org/record/1492449#.X8QhCGhKhPY), store all the audio files in the data folder and the annotation files in the annotation folder you just created
-- run data_extraction.py
+- Dowbload the [guitarset dataset](https://zenodo.org/record/1492449#.X8QhCGhKhPY), store all the audio files in the `audio` folder and the annotation files in the annotation folder you just created
+- run ` python data_extraction.py`
 It might take a while. You'll see chomagrams being created in the images folder, exciting!
-- modeling.py
-
-
+- run `python modeling.py`
+It might take 15-20min. After it, you're done! Your brand new model will be saved as 'final_model.h5' and it's ready for prediction!
