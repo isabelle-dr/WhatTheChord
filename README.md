@@ -103,10 +103,11 @@ $ virtualenv .venv
 $ source .venv/bin/activate
 $ pip install -r requirements.txt
 ``
-- Create two folders in the directory: `data` and `annotation`
+- Create three folders in the directory: `data`, `annotation`, `images`.
 
 - Dowbload the [guitarset dataset](https://zenodo.org/record/1492449#.X8QhCGhKhPY), store all the audio files in the data folder and the annotation files in the annotation folder you just created
 - run data_extraction.py
+It might take a while. You'll see chomagrams being created in the images folder, exciting!
 - modeling.py
 
 
