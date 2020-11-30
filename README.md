@@ -101,7 +101,7 @@ Make sure you're situated in the `what-the-chord`directory.
 - Create a folder `streamlit` containing two sub folders `images` and `recording`
 - Run the following code\
 ``
-$ streamlit run app.py
+$ streamlit run streamlit.py
 ``
 - The webapp is launches in your browser. If not, you can open it at [http://localhost:8501](http://localhost:8501)
 
