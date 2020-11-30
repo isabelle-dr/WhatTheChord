@@ -11,11 +11,11 @@ MODEL_H5 = os.path.join(ROOT_DIR, 'final_model.h5')
 LE = os.path.join(ROOT_DIR, 'labelencoder.sav')
 
 OUT_DIR = os.path.join(ROOT_DIR, 'streamlit/')
-RECORDING_DIR = os.path.join(OUT_DIR, 'recording')
 IMAGE_DIR = os.path.join(OUT_DIR, 'images')
 
-WAVE_OUTPUT_FILE = os.path.join(RECORDING_DIR, "recorded.wav") # might need this for recording
-CHROMAGRAM_FILE = os.path.join(IMAGE_DIR, "chromagram.jpg") # don't need this?
+WAVE_UPLOADED_FILE = os.path.join(OUT_DIR, "uploaded.wav") 
+WAVE_RECORDED_FILE = os.path.join(OUT_DIR, "recorded.wav") 
+CHROMAGRAM_FILE = os.path.join(OUT_DIR, "chromagram.jpg") 
 
 
 # Audio configurations

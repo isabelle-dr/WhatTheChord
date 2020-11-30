@@ -16,12 +16,18 @@ from tensorflow.keras.preprocessing.image import img_to_array
 from tensorflow.keras.models import load_model
 import sys
 
-
-# other imports
-from settings import IMAGE_DIR, DURATION, WAVE_OUTPUT_FILE, CHROMAGRAM_FILE
+# imports for streamlit app
+from settings import DURATION, WAVE_UPLOADED_FILE, WAVE_RECORDED_FILE, CHROMAGRAM_FILE, IMAGE_DIR
 import streamlit as st
 
+# for recording
+import sounddevice as sd
+from scipy.io.wavfile import write
 
+# for image display
+from PIL import Image
+from PIL import ImageFile
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 def create_chromagram(data, sr):
     #path_predictions = "prediction/"
@@ -49,68 +55,114 @@ def prep_pixels():
 def make_predictions(data):
     # to not get error messages
     model = load_model('final_model.h5')
-#    y_pred = model.predict_classes(data)
     y_pred = np.argmax(model.predict(data), axis=-1)
     filename = 'labelencoder.sav'
     le = pickle.load(open(filename, 'rb'))
     y_chord = le.inverse_transform(y_pred)
     return y_chord
 
-def predict(file):
-    data, sr = librosa.load(file)
+
+def predict(file, offset=0.0):
+    data, sr = librosa.load(file, offset=offset)
     create_chromagram(data, sr)
     data = prep_pixels()
     chord = make_predictions(data)
     return chord
 
-
-def display(file):
+def display(file, offset=0.0):
     fig, ax = plt.subplots(figsize=(10,4))
-    data, sr = librosa.load(file)
+    data, sr = librosa.load(file,  offset=offset)
     chromagram = librosa.feature.chroma_stft(data, sr=sr)
     librosa.display.specshow(chromagram, sr=sr, x_axis='time', y_axis='chroma', cmap='coolwarm')
+    plt.xlabel('seconds')
     plt.colorbar(format='%+2.0f dB')
     plt.title('Chromagram')
     st.pyplot(fig, clear_figure=False)
+    
 
+    # record
+def record(sr=22050, channels=1, duration=3):
+    recording = sd.rec(int(duration * sr), samplerate=sr, channels=channels)
+    sd.wait()
+    write('streamlit/recorded.wav', 22050, recording)
+    return recording
+    
     
 def main():
-    title = "What the chord"
+    st.set_page_config(page_title="WhatTheChord", page_icon="🎵", layout="centered", initial_sidebar_state="expanded",)
+    
+    
+    title = "What the chord?!"
+    header = "Play it, get it."
     st.title(title)
+    st.header(header)
+    st.write("\n")
+    st.write("\n")
+    image = Image.open('streamlit/images/background.JPG')
+    st.image(image, width=1000)
     
-    # upload file - working!
-    file =  st.file_uploader("Choose an audio file...", type="wav")
+    # upload file
+    st.write('Pick an audio file...')
+    file =  st.file_uploader("", type="wav")
+    # save it
+    if file:
+        with open("streamlit/uploaded.wav", 'wb') as f:
+            f.write(file.read())
     
-    # play - working !
-    if st.button('Play'):
+    # record 
+    st.write("Or record your own using your favourite instrument!")
+    if st.button("🎙️ Record it"):
+        with st.spinner("Recording (2sec)..."):
+            audio_file = record()
+            st.success("Recording completed")
+    st.write("\n")
+    st.write("\n")
+    
+    # play
+    if st.button('💿 Play it  '):
         if file:
-            audio_bytes = file.read()
-            st.audio(audio_bytes, format='audio/wav')
+            st.audio(WAVE_UPLOADED_FILE)
         else:
-            st.write("Please upload a file first")
+            if os.path.exists(WAVE_RECORDED_FILE):
+                st.audio(WAVE_RECORDED_FILE)
+            else:
+                st.write("Please upload or record a file first")
     
-    # classify - need to link to uploaded file...
-    if st.button('Classify'):
+    # classify 
+    if st.button('🎶 Find the chord'):
         if file:
-            audio_bytes = file.read()
-            with st.spinner("Classifying the chord"):
-                chord = predict(WAVE_OUTPUT_FILE)
+            with st.spinner("Classifying the chord of the file uploaded..."):
+                chord = predict(WAVE_UPLOADED_FILE)
             st.success("Classification completed")
-            st.write("### The recorded chord is...", list(chord)[0], "!")
-            if chord == 'N/A':
-                st.write("Please record sound first")
+            st.write("### The recorded chord is...         ", list(chord)[0], "!")
             st.write("\n")
-            st.balloons()
+            #st.balloons()
         else: 
-            st.write("Please upload a file first")
+            if os.path.exists(WAVE_RECORDED_FILE):
+                with st.spinner("Classifying the chord of the file recorded..."):
+                    chord = predict(WAVE_RECORDED_FILE, offset=0.9)
+                st.success("Classification completed")
+                st.write("### The recorded chord is...         ", list(chord)[0], "!")
+                st.write("\n")
+                #st.balloons()
+            else:
+                st.write("Please upload or record a file first")
      
-    # display image - need to link to uploaded file...
-    if st.button('Display Chromagram'):
-        if os.path.exists(WAVE_OUTPUT_FILE):
-            display(WAVE_OUTPUT_FILE)
-
+    # display chromagram
+    if st.button('📊 Display Chromagram'):
+        if file:
+            display(WAVE_UPLOADED_FILE)
+            st.write("Did you know humans perceive two musical pitches as similar colors if they differ by an octave?")
+            st.write("A chromagram indicates how much energy of each pitch class is present, by aggregating it's decibel values over the 10 octaves.")
+            st.write("The classifier used in this app is a trained Neural Network that uses images like these to predict the chord of an audio input.")
         else:
-            st.write("Please record sound first")
+            if os.path.exists(WAVE_RECORDED_FILE):
+                display(WAVE_RECORDED_FILE, offset=0.9)
+                st.write("Did you know humans perceive two musical pitches as similar colors if they differ by an octave?")
+                st.write("A chromagram indicates how much energy of each pitch class is present, by aggregating it's decibel values over the 10 octaves.")
+                st.write("The classifier used in this app is a trained Neural Network that uses images like these to predict the chord of an audio input.")
+            else:
+                st.write("Please upload or record a file first")
     
 if __name__ == '__main__':
     main()    
