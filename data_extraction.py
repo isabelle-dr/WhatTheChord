@@ -9,7 +9,6 @@ import jams
 
 pd.plotting.register_matplotlib_converters()
 import matplotlib.pyplot as plt
-%matplotlib inline
 
 import IPython.display as ipd
 from IPython.display import Audio
