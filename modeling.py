@@ -6,16 +6,12 @@ from numpy import asarray
 from numpy import save
 from numpy import mean
 from numpy import std
-
 pd.plotting.register_matplotlib_converters()
 import matplotlib.pyplot as plt
 from matplotlib.image import imread
-%matplotlib inline
-
 from tensorflow.keras import models
 from tensorflow.keras import layers
 from tensorflow.keras import optimizers
-
 from tensorflow.keras.preprocessing.image import load_img
 from tensorflow.keras.preprocessing.image import img_to_array
 from sklearn.model_selection import train_test_split
@@ -29,7 +25,7 @@ path_images = "images/"
 data = pd.read_csv("labels/chords.csv", index_col=0)
 data=data.dropna()
 
-############# prep raw data ################3
+############# PREP DATA ################
 # create labels column and encode
 le = LabelEncoder()
 data['labels'] = le.fit_transform(data['chord_instructed'])
@@ -57,7 +53,7 @@ labels = asarray(labels)
 save('photos.npy', photos)
 save('labels.npy', labels)
 
-# define functions
+############# DEFINE FUNCTIONS ################
 def load_dataset():
     # load arrays
     photos = load('photos.npy')
@@ -73,7 +69,6 @@ def load_dataset():
     y_test = to_categorical(y_test)
     return X_train, X_test, y_train, y_test
 
-# no change
 def prep_pixels(train, test):
     # convert from integers to float
     train_norm = train.astype('float32')
@@ -84,7 +79,6 @@ def prep_pixels(train, test):
     # return normalized images
     return train_norm, test_norm
 
-# made a deeper network, add padding, increase number of filters in hidden layers.
 def define_model():
     model = models.Sequential()
     model.add(layers.Conv2D(32, (3,3), activation='relu',  padding='same', kernel_initializer='he_uniform', input_shape=(64, 64, 1))) #conv layer
@@ -100,28 +94,6 @@ def define_model():
     model.compile(optimizer=opt, loss='categorical_crossentropy', metrics=['accuracy'])
     return model
 
-# 15 epochs to evaluate
-def evaluate_model(dataX, dataY, n_folds=5):
-    scores, histories = list(), list() # initializing to keep track
-    # prep cross validation
-    kfold = KFold(n_folds, shuffle=True, random_state=1)
-    # enumerate splits
-    for train_ix, test_ix in kfold.split(dataX):
-        # define model
-        model = define_model()
-        # select rows to train/test
-        trainX, trainY, testX, testY = dataX[train_ix], dataY[train_ix], dataX[test_ix], dataY[test_ix]
-        # fit the model
-        history = model.fit(trainX, trainY, epochs=10, batch_size=32, validation_data=(testX, testY), verbose=0)
-        # evaluate model
-        _, acc = model.evaluate(testX, testY, verbose=0) # returns loss value and eval metric, we're only interested in that second one
-        print('> %.3f' % (acc * 100.0))
-        # append scores
-        scores.append(acc)
-        histories.append(history)
-    return scores, histories
-
-# no change
 def summarize_diagnostics(histories):
     for i in range(len(histories)):
         # plot loss
@@ -136,17 +108,17 @@ def summarize_diagnostics(histories):
         plt.plot(histories[i].history['val_accuracy'], color='orange', label='test')
     plt.show()
 
-# no change
 def summarize_performance(scores):
     # print summary
     print('Accuracy: mean=%.3f std=%.3f, n=%d' % (mean(scores)*100, std(scores)*100, len(scores)))
     # box and whisker plots of results
     plt.boxplot(scores)
     plt.show()
-    
+
+
+############# CALL FUNCTIONS AND FIT MODEL ################
 # load dataset
 X_train, X_test, y_train, y_test = load_dataset()
-
 # prepare pixel data
 X_train, X_test = prep_pixels(X_train, X_test)
 model = define_model()
