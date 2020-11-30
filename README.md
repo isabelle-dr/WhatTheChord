@@ -79,9 +79,9 @@ $ cd WhatTheChord
 ``
 - Install virtual environment using pip, activate it and install requirements.txt\
 ``
-$ pip install virtualenv
-$ virtualenv .venv
-$ source .venv/bin/activate
+$ pip install virtualenv\
+$ virtualenv .venv\
+$ source .venv/bin/activate\
 $ pip install -r requirements.txt
 ``
 - Make a prediction from the command line
@@ -99,7 +99,7 @@ Make sure you're situated in the `what-the-chord`directory.
 ## Using the Streamlit app
 
 - Create a folder `streamlit` containing two sub folders `images` and `recording`
-- Run the following code
+- Run the following code\
 ``
 $ streamlit run app.py
 ``
@@ -113,9 +113,9 @@ $ cd what-the-chord
 ``
 - Install virtual environment using pip, activate it and install requirements.txt\
 ``
-$ pip install virtualenv
-$ virtualenv .venv
-$ source .venv/bin/activate
+$ pip install virtualenv\
+$ virtualenv .venv\
+$ source .venv/bin/activate\
 $ pip install -r requirements.txt
 ``
 - Create three folders in the directory: `audio`, `annotation`, `images`, `labels`
