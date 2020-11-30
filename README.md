@@ -127,6 +127,8 @@ org/repo/
 |           ├── final_model.h5
 |           ├── labelencoder.sav
 |           ├── modeling.py
+|           ├── settings.py
+|           ├── streamlit.py
 |           └── requirements.txt
 ```
 
