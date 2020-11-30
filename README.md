@@ -113,7 +113,9 @@ $ source .venv/bin/activate
 $ pip install -r requirements.txt
 ``
 - Create three folders in the directory: `audio`, `annotation`, `images`, `labels`, `prediction`
-Your repo folder should have this structure
+Your repo folder should have this structure:
+```bash
+org/repo/
 ├── WhatTheChord/
 |           ├── annotation/
 |           ├── audio/
@@ -126,6 +128,7 @@ Your repo folder should have this structure
 |           ├── labelencoder.sav
 |           ├── modeling.py
 |           └── requirements.txt
+```
 
 - Dowbload the [guitarset dataset](https://zenodo.org/record/1492449#.X8QhCGhKhPY), store all the audio files in the `audio` folder and the annotation files in the annotation folder you just created
 - run ` python data_extraction.py`
