@@ -1,7 +1,6 @@
 # What the chord
 Chord predictor using a CNN on choma vectors
 
-
 ## About the project
 This project was part of LighthouseLabs data science bootcamp and took two weeks to complete. It consisted of:
 - research on audio transformations
@@ -11,7 +10,7 @@ This project was part of LighthouseLabs data science bootcamp and took two weeks
 - make prediction on a new audio sample: using the command line or through a streamlit web app.
 
 I ended up an accuracy of 80% which is acceptable for the scope of the project. I was using data containing 42 labels with a high class imbalance, with audio files varying a lot around the 'root' chord. I'm planning on tuning the model to reach a higher accuracy :)
-The goal of this project is more to build an MVP model from start to finish using all steps of a data science project, and use this model for prediction smoothly. 
+The goal here is to build an MVP model from start to finish using all steps of a data science project, and use this model for prediction smoothly. 
 
 ### The chords
 The data is composed of 180 audio samples containing the following chords:
@@ -86,7 +85,7 @@ $ source .venv/bin/activate
 $ pip install -r requirements.txt
 ``
 - Make a prediction from the command line
-Create a folder called `prediction` in the repo and put the audio files you want to predict in the `prediction` folder (.wav or .mp3). Then, run this command from the comand line. 
+Put the audio files you want to predict in the `prediction` folder (.wav or .mp3). Then, run this command from the comand line. 
 
 ``
 $ python -W ignore app.py <yourfilename.wav>
@@ -112,11 +111,12 @@ $ virtualenv .venv
 $ source .venv/bin/activate
 $ pip install -r requirements.txt
 ``
-- Create three folders in the directory: `audio`, `annotation`, `images`, `labels`, `prediction`
+- Create three folders in the directory: `audio`, `annotation`, `images`, `labels`
 Your repo folder should have this structure:
 ```bash
 org/repo/
 ├── WhatTheChord/
+
 |           ├── annotation/
 |           ├── audio/
 |           ├── images/
