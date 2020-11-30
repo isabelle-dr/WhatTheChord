@@ -125,6 +125,9 @@ org/repo/
 |           ├── images/
 |           ├── labels/
 |           ├── prediction/
+|           ├── streamlit/
+|           |        ├── images/
+|           |        └── recording/
 |           ├── app.py
 |           ├── data_extraction.py
 |           ├── final_model.h5
