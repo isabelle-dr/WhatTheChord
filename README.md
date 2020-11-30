@@ -9,48 +9,48 @@ Chord predictor using a CNN on choma vectors
 
 ### The chords
 The data is composed of 180 audio samples containing the following chords:
-0  --> A#:7
-1  --> A#:hdim7
-2  --> A#:maj
-3  --> A#:min
-4  --> A:7
-5  --> A:hdim7
-6  --> A:maj
-7  --> A:min
-8  --> B:maj
-9  --> B:min
-10  --> C#:7
-11  --> C#:hdim7
-12  --> C#:maj
-13  --> C#:min
-14  --> C:7
-15  --> C:hdim7
-16  --> C:maj
-17  --> C:min
-18  --> D#:7
-19  --> D#:maj
-20  --> D#:min
-21  --> D:7
-22  --> D:maj
-23  --> D:min
-24  --> E:7
-25  --> E:hdim7
-26  --> E:maj
-27  --> E:min
-28  --> F#:7
-29  --> F#:maj
-30  --> F#:min
-31  --> F:7
-32  --> F:hdim7
-33  --> F:maj
-34  --> F:min
-35  --> G#:7
-36  --> G#:hdim7
-37  --> G#:maj
-38  --> G#:min
-39  --> G:hdim7
-40  --> G:maj
-41  --> G:min
+0  --> A#:7\
+1  --> A#:hdim7\
+2  --> A#:maj\
+3  --> A#:min\
+4  --> A:7\
+5  --> A:hdim7\
+6  --> A:maj\
+7  --> A:min\
+8  --> B:maj\
+9  --> B:min\
+10  --> C#:7\
+11  --> C#:hdim7\
+12  --> C#:maj\
+13  --> C#:min\
+14  --> C:7\
+15  --> C:hdim7\
+16  --> C:maj\
+17  --> C:min\
+18  --> D#:7\
+19  --> D#:maj\
+20  --> D#:min\
+21  --> D:7\
+22  --> D:maj\
+23  --> D:min\
+24  --> E:7\
+25  --> E:hdim7\
+26  --> E:maj\
+27  --> E:min\
+28  --> F#:7\
+29  --> F#:maj\
+30  --> F#:min\
+31  --> F:7\
+32  --> F:hdim7\
+33  --> F:maj\
+34  --> F:min\
+35  --> G#:7\
+36  --> G#:hdim7\
+37  --> G#:maj\
+38  --> G#:min\
+39  --> G:hdim7\
+40  --> G:maj\
+41  --> G:min\
 
 ### The data
 Guitarset dataset
@@ -105,8 +105,8 @@ $ pip install -r requirements.txt
 ``
 - Create two folders in the directory: `data` and `annotation`
 
-- Dowbload the [guitarset dataset](https://zenodo.org/record/1492449#.X8QhCGhKhPY), store all the audio files in the data folder and the annotation files in the annotation folder
-- run extract_features.py
-
+- Dowbload the [guitarset dataset](https://zenodo.org/record/1492449#.X8QhCGhKhPY), store all the audio files in the data folder and the annotation files in the annotation folder you just created
+- run data_extraction.py
+- modeling.py
 
 
