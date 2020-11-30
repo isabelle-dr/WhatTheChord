@@ -116,7 +116,6 @@ Your repo folder should have this structure:
 ```bash
 org/repo/
 ├── WhatTheChord/
-
 |           ├── annotation/
 |           ├── audio/
 |           ├── images/
