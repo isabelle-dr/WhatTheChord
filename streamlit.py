@@ -28,6 +28,8 @@ from scipy.io.wavfile import write
 from PIL import Image
 from PIL import ImageFile
 ImageFile.LOAD_TRUNCATED_IMAGES = True
+# background image2
+import base64
 
 def create_chromagram(data, sr):
     #path_predictions = "prediction/"
@@ -81,45 +83,72 @@ def display(file, offset=0.0):
     
 
     # record
-def record(sr=22050, channels=1, duration=3):
+def record(sr=22050, channels=1, duration=4):
     recording = sd.rec(int(duration * sr), samplerate=sr, channels=channels)
     sd.wait()
     write('streamlit/recorded.wav', 22050, recording)
     return recording
     
+    import base64
+
+# bacground  - from local file
+@st.cache(allow_output_mutation=True)
+def get_base64_of_bin_file(bin_file):
+    with open(bin_file, 'rb') as f:
+        data = f.read()
+    return base64.b64encode(data).decode()
+
+def set_png_as_page_bg(png_file):
+    bin_str = get_base64_of_bin_file(png_file)
+    page_bg_img = '''
+    <style>
+    body {
+    background-image: url("data:image/png;base64,%s");
+    background-size: cover;
+    }
+    </style>
+    ''' % bin_str
+    st.markdown(page_bg_img, unsafe_allow_html=True)
+    return
     
 def main():
+    # layout
     st.set_page_config(page_title="WhatTheChord", page_icon="🎵", layout="centered", initial_sidebar_state="expanded",)
-    
-    
-    title = "What the chord?!"
-    header = "Play it, get it."
-    st.title(title)
-    st.header(header)
+    #title = "What the chord?!"
+    #header = "Play it, get it."
+    #st.title(title)
+    #st.header(header)
     st.write("\n")
     st.write("\n")
-    image = Image.open('streamlit/images/background.JPG')
-    st.image(image, width=1000)
+    st.write("\n")
+    st.write("\n")
+    st.write("\n")
+    st.write("\n")
+    
+    set_png_as_page_bg('streamlit/images/test2.gif')
+    
+    # record 
+    st.write("Record it with your favourite instrument!")
+    if st.button("🎙️ Record it"):
+        with st.spinner("Recording (4sec)..."):
+            audio_file = record()
+            st.success("Recording completed!")
+    st.write("\n")
+    st.write("\n")
     
     # upload file
-    st.write('Pick an audio file...')
+    st.write('Or pick an audio file you already have.')
     file =  st.file_uploader("", type="wav")
     # save it
     if file:
         with open("streamlit/uploaded.wav", 'wb') as f:
             f.write(file.read())
     
-    # record 
-    st.write("Or record your own using your favourite instrument!")
-    if st.button("🎙️ Record it"):
-        with st.spinner("Recording (2sec)..."):
-            audio_file = record()
-            st.success("Recording completed")
     st.write("\n")
-    st.write("\n")
-    
     # play
     if st.button('💿 Play it  '):
+        # from local
+        #set_png_as_page_bg('streamlit/images/chromagram.jpg')
         if file:
             st.audio(WAVE_UPLOADED_FILE)
         else:
@@ -141,8 +170,8 @@ def main():
             if os.path.exists(WAVE_RECORDED_FILE):
                 with st.spinner("Classifying the chord of the file recorded..."):
                     chord = predict(WAVE_RECORDED_FILE, offset=0.9)
-                st.success("Classification completed")
-                st.write("### The recorded chord is...         ", list(chord)[0], "!")
+                st.success("Classification completed!")
+                st.write("### The recorded chord is...         ", list(chord)[0])
                 st.write("\n")
                 #st.balloons()
             else:
@@ -167,3 +196,63 @@ def main():
 if __name__ == '__main__':
     main()    
     
+    
+    
+    
+
+    # display an image
+#     image = Image.open('streamlit/images/test.gif')
+#     st.image(image, width=1000)
+
+    # disply video
+    #vid=open("streamlit/images/test.gif","rb")
+    #st.video(vid)
+    
+    
+    
+    # background - url
+#     page_bg_img = '''
+# <style>
+# body {
+# background-image: url("https://images.unsplash.com/photo-1542281286-9e0a16bb7366");
+# height: 1300px;
+# background-size: cover;
+# position: relative;}
+# </style>
+# '''
+#     st.markdown(page_bg_img, unsafe_allow_html=True)
+    
+    
+    
+#     # background - local
+#     def set_png_as_page_bg(png_file):
+#     bin_str = get_base64_of_bin_file(png_file)
+#     page_bg_img = '''
+#     <style>
+#     body {
+#     background-image: url("data:image/png;base64,%s");
+#     background-size: cover;
+#     }
+#     </style>
+#     ''' % bin_str
+    
+#     st.markdown(page_bg_img, unsafe_allow_html=True)
+#     return
+    
+#     set_png_as_page_bg('streamlit/images/chromagram.jpg')
+
+
+    # gifs
+# """### gif from url"""
+# st.markdown("![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)")
+
+# """### gif from local file"""
+# file_ = open("/home/rzwitch/Desktop/giphy.gif", "rb")
+# contents = file_.read()
+# data_url = base64.b64encode(contents).decode("utf-8")
+# file_.close()
+
+# st.markdown(
+#     f'<img src="data:image/gif;base64,{data_url}" alt="cat gif">',
+#     unsafe_allow_html=True,
+# )
