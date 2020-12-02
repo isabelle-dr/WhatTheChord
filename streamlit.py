@@ -105,47 +105,54 @@ def set_png_as_page_bg(png_file):
     body {
     background-image: url("data:image/png;base64,%s");
     background-size: cover;
+    height: 700px;
+    position: relative;
     }
     </style>
     ''' % bin_str
     st.markdown(page_bg_img, unsafe_allow_html=True)
     return
+    #    position: relative;
+    #     height: 1000px;
+   # size: cover;
     
 def main():
     # layout
     st.set_page_config(page_title="WhatTheChord", page_icon="🎵", layout="centered", initial_sidebar_state="expanded",)
-    #title = "What the chord?!"
-    #header = "Play it, get it."
-    #st.title(title)
-    #st.header(header)
-    st.write("\n")
-    st.write("\n")
-    st.write("\n")
-    st.write("\n")
-    st.write("\n")
-    st.write("\n")
+
+    set_png_as_page_bg('streamlit/images/s1.gif')
     
-    set_png_as_page_bg('streamlit/images/test2.gif')
+    st.write("\n")
+    st.write("\n")
+    st.write("\n")
+    st.write("\n")
+    st.write("\n")
+    st.write("\n")
+    st.write("\n")
     
     # record 
-    st.write("Record it with your favourite instrument!")
+    #st.write("Record it with your favourite instrument!")
     if st.button("🎙️ Record it"):
-        with st.spinner("Recording (4sec)..."):
+        set_png_as_page_bg('streamlit/images/s2.gif')
+        with st.spinner("Recording for 4 sec..."):
             audio_file = record()
             st.success("Recording completed!")
+
+    
+    #upload file
+    if st.button("🎙️ Upload it"):
+        file =  st.file_uploader("", type="wav")
+        #save it
+        if file:
+            with open("streamlit/uploaded.wav", 'wb') as f:
+                f.write(file.read())
+        #st.success("File uploaded!")
+    
+    st.write("\n")
     st.write("\n")
     st.write("\n")
     
-    # upload file
-    st.write('Or pick an audio file you already have.')
-    file =  st.file_uploader("", type="wav")
-    # save it
-    if file:
-        with open("streamlit/uploaded.wav", 'wb') as f:
-            f.write(file.read())
-    
-    st.write("\n")
-    # play
+    #play - with uploading button
     if st.button('💿 Play it  '):
         # from local
         #set_png_as_page_bg('streamlit/images/chromagram.jpg')
@@ -157,7 +164,7 @@ def main():
             else:
                 st.write("Please upload or record a file first")
     
-    # classify 
+    # classify - with file uploading button
     if st.button('🎶 Find the chord'):
         if file:
             with st.spinner("Classifying the chord of the file uploaded..."):
@@ -177,7 +184,7 @@ def main():
             else:
                 st.write("Please upload or record a file first")
      
-    # display chromagram
+   # display chromagram - - with file uploading button
     if st.button('📊 Display Chromagram'):
         if file:
             display(WAVE_UPLOADED_FILE)
@@ -256,3 +263,59 @@ if __name__ == '__main__':
 #     f'<img src="data:image/gif;base64,{data_url}" alt="cat gif">',
 #     unsafe_allow_html=True,
 # )
+
+
+
+
+
+    # play - with uploading button
+#     if st.button('💿 Play it  '):
+#         # from local
+#         #set_png_as_page_bg('streamlit/images/chromagram.jpg')
+#         if file:
+#             st.audio(WAVE_UPLOADED_FILE)
+#         else:
+#             if os.path.exists(WAVE_RECORDED_FILE):
+#                 st.audio(WAVE_RECORDED_FILE)
+#             else:
+#                 st.write("Please upload or record a file first")
+    
+    
+    
+#     # classify - with file uploading button
+#     if st.button('🎶 Find the chord'):
+#         if file:
+#             with st.spinner("Classifying the chord of the file uploaded..."):
+#                 chord = predict(WAVE_UPLOADED_FILE)
+#             st.success("Classification completed")
+#             st.write("### The recorded chord is...         ", list(chord)[0], "!")
+#             st.write("\n")
+#             #st.balloons()
+#         else: 
+#             if os.path.exists(WAVE_RECORDED_FILE):
+#                 with st.spinner("Classifying the chord of the file recorded..."):
+#                     chord = predict(WAVE_RECORDED_FILE, offset=0.9)
+#                 st.success("Classification completed!")
+#                 st.write("### The recorded chord is...         ", list(chord)[0])
+#                 st.write("\n")
+#                 #st.balloons()
+#             else:
+#                 st.write("Please upload or record a file first")
+
+
+
+    # display chromagram - - with file uploading button
+#     if st.button('📊 Display Chromagram'):
+#         if file:
+#             display(WAVE_UPLOADED_FILE)
+#             st.write("Did you know humans perceive two musical pitches as similar colors if they differ by an octave?")
+#             st.write("A chromagram indicates how much energy of each pitch class is present, by aggregating it's decibel values over the 10 octaves.")
+#             st.write("The classifier used in this app is a trained Neural Network that uses images like these to predict the chord of an audio input.")
+#         else:
+#             if os.path.exists(WAVE_RECORDED_FILE):
+#                 display(WAVE_RECORDED_FILE, offset=0.9)
+#                 st.write("Did you know humans perceive two musical pitches as similar colors if they differ by an octave?")
+#                 st.write("A chromagram indicates how much energy of each pitch class is present, by aggregating it's decibel values over the 10 octaves.")
+#                 st.write("The classifier used in this app is a trained Neural Network that uses images like these to predict the chord of an audio input.")
+#             else:
+#                 st.write("Please upload or record a file first")
