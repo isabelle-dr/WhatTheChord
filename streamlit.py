@@ -22,6 +22,7 @@ import streamlit as st
 
 # for recording
 import sounddevice as sd
+import soundfile as sf
 from scipy.io.wavfile import write
 
 # for image display
@@ -88,8 +89,6 @@ def record(sr=22050, channels=1, duration=4):
     sd.wait()
     write('streamlit/recorded.wav', 22050, recording)
     return recording
-    
-    import base64
 
 # bacground  - from local file
 @st.cache(allow_output_mutation=True)
