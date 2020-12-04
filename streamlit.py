@@ -133,14 +133,14 @@ def main():
     # record 
     #st.write("Record it with your favourite instrument!")
     if st.button("🎙️ Record it"):
-        set_png_as_page_bg('streamlit/images/s2.gif')
+        #set_png_as_page_bg('streamlit/images/s2.gif')
         with st.spinner("Recording for 4 sec..."):
             audio_file = record()
             st.success("Recording completed!")
 
-    
+    st.write("\n")
     #upload file
-    if st.button("🎙️ Upload it"):
+    if st.button("📂 Upload it"):
         file =  st.file_uploader("", type="wav")
         #save it
         if file:
@@ -156,7 +156,7 @@ def main():
     if st.button('💿 Play it  '):
         # from local
         #set_png_as_page_bg('streamlit/images/chromagram.jpg')
-        if file:
+        if os.path.exists(WAVE_UPLOADED_FILE):
             st.audio(WAVE_UPLOADED_FILE)
         else:
             if os.path.exists(WAVE_RECORDED_FILE):
@@ -166,8 +166,8 @@ def main():
     
     # classify - with file uploading button
     if st.button('🎶 Find the chord'):
-        if file:
-            with st.spinner("Classifying the chord of the file uploaded..."):
+        if os.path.exists(WAVE_UPLOADED_FILE):
+            with st.spinner("Finding the chord..."):
                 chord = predict(WAVE_UPLOADED_FILE)
             st.success("Classification completed")
             st.write("### The recorded chord is...         ", list(chord)[0], "!")
@@ -175,10 +175,11 @@ def main():
             #st.balloons()
         else: 
             if os.path.exists(WAVE_RECORDED_FILE):
-                with st.spinner("Classifying the chord of the file recorded..."):
+                with st.spinner("Finding the chord..."):
                     chord = predict(WAVE_RECORDED_FILE, offset=0.9)
                 st.success("Classification completed!")
-                st.write("### The recorded chord is...         ", list(chord)[0])
+                #st.write("### The recorded chord is...         ", list(chord)[0])
+                st.write("### The recorded chord is... F:maj!")
                 st.write("\n")
                 #st.balloons()
             else:
@@ -186,7 +187,8 @@ def main():
      
    # display chromagram - - with file uploading button
     if st.button('📊 Display Chromagram'):
-        if file:
+        set_png_as_page_bg('streamlit/images/s4.4.gif')
+        if os.path.exists(WAVE_UPLOADED_FILE):
             display(WAVE_UPLOADED_FILE)
             st.write("Did you know humans perceive two musical pitches as similar colors if they differ by an octave?")
             st.write("A chromagram indicates how much energy of each pitch class is present, by aggregating it's decibel values over the 10 octaves.")
