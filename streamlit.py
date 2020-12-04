@@ -1,4 +1,3 @@
-pip install librosa
 # imports for model
 import pandas as pd
 import numpy as np
