@@ -186,7 +186,7 @@ def main():
      
    # display chromagram - - with file uploading button
     if st.button('📊 Display Chromagram'):
-        set_png_as_page_bg('streamlit/images/s4.4.gif')
+        set_png_as_page_bg('streamlit/images/s4.gif')
         if os.path.exists(WAVE_UPLOADED_FILE):
             display(WAVE_UPLOADED_FILE)
             st.write("Did you know humans perceive two musical pitches as similar colors if they differ by an octave?")
