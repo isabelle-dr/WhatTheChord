@@ -42,8 +42,11 @@ I also used the [magphase](https://librosa.org/doc/0.8.0/generated/librosa.magph
  I used Keras Tensorflow to build a Convolutional Neural network with two hidden layers and used Maxpooling layers.
  
 # Make a prediction
-## Using the command line
-Make sure the audio files you feed the model only contain a variation of one chord for best results.
+
+## Using the Streamlit app
+
+![alt text](https://github.com/Isabelle-Dr/WhatTheChord/blob/main/readme_images/streamlit_app.gif.png?raw=true)
+- Clone the repo and install requirements.txt\
 
 - Clone this repo\
 ``
@@ -57,24 +60,21 @@ $ virtualenv .venv\
 $ source .venv/bin/activate\
 $ pip install -r requirements.txt
 ``
-- Make a prediction from the command line
-Put the audio files you want to predict in the `prediction` folder (.wav or .mp3). There is already some files in that folder if you want to use them for prediction
-Then, run this command from the comand line (make sure you're situated in the `what-the-chord`directory)
-``
-$ python app.py <yourfilename.wav>
-``
-
-- That's it! You'll see the predicted chord right after this command :) In the prediciton folder, you'll also see the chromagram image of your song!
-
-## Using the Streamlit app
-- Clone the repo and install requirements.txt\
-
 - Run the following code\
 ``
 $ streamlit run streamlit.py
 ``
 - The webapp is now launched in your browser! If not, you can open it at [http://localhost:8501](http://localhost:8501)
 Play aorund with it, you can either record your own sample or upload a file.
+
+## Using the command line
+Make sure the audio files you feed the model only contain a variation of one chord for best results.
+Put the audio files you want to predict in the `prediction` folder (.wav or .mp3). There is already some files in that folder if you want to use them for prediction
+Then, run this command from the comand line (make sure you're situated in the `what-the-chord`directory)
+``
+$ python app.py <yourfilename.wav>
+``
+- That's it! You'll see the predicted chord right after this command :) In the prediciton folder, you'll also see the chromagram image of your song!
 
 # Build the project from the source
 - Clone this repo\
