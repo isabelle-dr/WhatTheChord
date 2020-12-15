@@ -60,7 +60,6 @@ $ pip install -r requirements.txt
 - Make a prediction from the command line
 Put the audio files you want to predict in the `prediction` folder (.wav or .mp3). There is already some files in that folder if you want to use them for prediction
 Then, run this command from the comand line (make sure you're situated in the `what-the-chord`directory)
-
 ``
 $ python app.py <yourfilename.wav>
 ``
@@ -68,6 +67,8 @@ $ python app.py <yourfilename.wav>
 - That's it! You'll see the predicted chord right after this command :) In the prediciton folder, you'll also see the chromagram image of your song!
 
 ## Using the Streamlit app
+- Clone the repo and install requirements.txt\
+
 - Run the following code\
 ``
 $ streamlit run streamlit.py
@@ -118,3 +119,4 @@ org/repo/
 |           ├── streamlit.py
 |           └── requirements.txt
 ```
+
