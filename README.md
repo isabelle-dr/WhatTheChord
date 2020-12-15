@@ -10,7 +10,7 @@ This project was part of LighthouseLabs data science bootcamp and took two weeks
 - train deep learning model
 - make prediction on a new audio sample: using the command line or through a streamlit web app.
 
-### The [dataset]((https://zenodo.org/record/1492449#.X8QhCGhKhPY))
+### The [dataset](https://zenodo.org/record/1492449#.X8QhCGhKhPY)
 The dataset is composed of 180 tracks, each having one *comp* audio file and one *solo* audio file, making a total of 360 audio files of approximatively 30sec.
 This audio data comes with precise annotations about the chords. 
 There are two informations regarding the chords: the chords instructed to the player and chord that they actually played (the two differ slightly since the musicians had some leeway to fit a speicif music style, they were improvising around a root chord on a given style). 
