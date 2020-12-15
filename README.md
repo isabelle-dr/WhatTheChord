@@ -38,7 +38,7 @@ I also used the [magphase](https://librosa.org/doc/0.8.0/generated/librosa.magph
 ![alt text](https://github.com/Isabelle-Dr/WhatTheChord/blob/main/readme_images/chromagrams.png?raw=true)
 
 ## The model
- I used a Convolutional Neural network with two hidden layers and used Maxpooling layers.
+ I used Keras Tensorflow to build a Convolutional Neural network with two hidden layers and used Maxpooling layers.
  
 # Make a prediction
 ## Using the command line
