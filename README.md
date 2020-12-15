@@ -17,9 +17,9 @@ There are two informations regarding the chords: the chords instructed to the pl
 
 After exploring the data, I noticed that in the *solo* audio files, the musicians got a bit far from the instructed chord, compared to the *comp* audio files. 
 I narrowed down this dataset in the following way during the data processing phrase:
-- use only 'comp' audio tracks (180)
+- use only *comp* audio tracks (180)
 - remove very under representated classes (all hdim and 7 chords)
-- keep only slices of audio where the chord played is *close enough* to the chord instructed
+- keep only slices of audio where the chord played is "close enough" to the chord instructed
 
 ### The chords
 The chords that this model is capable of transcribing are the 24 most common chords:
@@ -33,7 +33,8 @@ G:maj, G:min, G#:maj, G#:min\
 
 ### The image representations
 I used chomagrams CENS (Chroma Energy Normalized) using the [Librosa](https://librosa.org/doc/latest/index.html) pakage. This transformation smoothes out local deviations by taking statistics over large windows. It gave better performance for this particular dataset model because of the high variability around root chords in the dataset. 
-I also used the [magphase](https://librosa.org/doc/0.8.0/generated/librosa.magphase.html) transformation to de-noise images
+I also used the [magphase](https://librosa.org/doc/0.8.0/generated/librosa.magphase.html) transformation to de-noise images.
+
 ![alt text](https://github.com/Isabelle-Dr/WhatTheChord/blob/main/readme_images/chromagrams.png?raw=true)
 
 ## The model
