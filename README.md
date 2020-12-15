@@ -122,5 +122,5 @@ org/repo/
 
 ### Acknowledgments
 
-The [Music Information Retrieval Community](https://musicinformationretrieval.com/) for their help and resources, with a special thanks to [napulen](https://github.com/napulen)
+The [Music Information Retrieval Community](https://musicinformationretrieval.com/) for their help and resources, with a special thanks to [napulen](https://github.com/napulen)\
 The [MIREX](https://www.music-ir.org/mirex/wiki/2017:Audio_Chord_Estimation_Results) website
