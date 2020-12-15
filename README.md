@@ -124,6 +124,7 @@ org/repo/
 
 The [Music Information Retrieval Community](https://musicinformationretrieval.com/) for their help and resources, with a special thanks to [napulen](https://github.com/napulen)\
 The [MIREX](https://www.music-ir.org/mirex/wiki/2017:Audio_Chord_Estimation_Results) website\
+Streamlit app design by [Paul Geiben](https://www.linkedin.com/in/paul-geiben-42a627134/)\
 
 Papers:\
 [A FULLY CONVOLUTIONAL DEEP AUDITORY MODEL FOR MUSICAL CHORD
