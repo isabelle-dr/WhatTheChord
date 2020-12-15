@@ -123,11 +123,11 @@ org/repo/
 ### Acknowledgments and ressources
 
 The [Music Information Retrieval Community](https://musicinformationretrieval.com/) for their help and resources, with a special thanks to [napulen](https://github.com/napulen)\
-The [MIREX](https://www.music-ir.org/mirex/wiki/2017:Audio_Chord_Estimation_Results) website
+The [MIREX](https://www.music-ir.org/mirex/wiki/2017:Audio_Chord_Estimation_Results) website\
 
 Papers:
 [A FULLY CONVOLUTIONAL DEEP AUDITORY MODEL FOR MUSICAL CHORD
-RECOGNITION](http://www.cp.jku.at/research/papers/Korzeniowski_MLSP_2016.pdf)
-[Audiolabs - Hidden Markov Models](https://www.audiolabs-erlangen.de/resources/MIR/FMP/C5/C5S3_HiddenMarkovModel.html)
+RECOGNITION](http://www.cp.jku.at/research/papers/Korzeniowski_MLSP_2016.pdf)\
+[Audiolabs - Hidden Markov Models](https://www.audiolabs-erlangen.de/resources/MIR/FMP/C5/C5S3_HiddenMarkovModel.html)\
 [Audiolabs - Chord Recognition](https://www.audiolabs-erlangen.de/resources/MIR/FMP/C5/C5S2_ChordRec_Templates.html)
 
