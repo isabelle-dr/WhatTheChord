@@ -45,7 +45,7 @@ I also used the [magphase](https://librosa.org/doc/0.8.0/generated/librosa.magph
 
 ## Using the Streamlit app
 
-![alt text](https://github.com/Isabelle-Dr/WhatTheChord/blob/main/readme_images/streamlit_app.gif.png?raw=true)
+![alt text](https://github.com/Isabelle-Dr/WhatTheChord/blob/main/readme_images/streamlit_app.gif?raw=true)
 - Clone the repo and install requirements.txt\
 
 - Clone this repo\
