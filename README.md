@@ -5,64 +5,38 @@ Chord predictor using a CNN on choma vectors
 This project was part of LighthouseLabs data science bootcamp and took two weeks to complete. It consisted of:
 - research on audio transformations
 - get a dataset: (I used the [guitarset dataset](https://zenodo.org/record/1492449#.X8QhCGhKhPY)) 
+- data processing
 - feature extraction of chromagrams from audio data
 - train deep learning model
 - make prediction on a new audio sample: using the command line or through a streamlit web app.
 
-I ended up an accuracy of 80% which is acceptable for the scope of the project. I was using data containing 42 labels with a high class imbalance, with audio files varying a lot around the 'root' chord. I'm planning on tuning the model to reach a higher accuracy :)
-The goal here is to build an MVP model from start to finish using all steps of a data science project, and use this model for prediction smoothly. 
+### The [dataset]((https://zenodo.org/record/1492449#.X8QhCGhKhPY))
+The dataset is composed of 180 tracks, each having one *comp* audio file and one *solo* audio file, making a total of 360 audio files of approximatively 30sec.
+This audio data comes with precise annotations about the chords. 
+There are two informations regarding the chords: the chords instructed to the player and chord that they actually played (the two differ slightly since the musicians had some leeway to fit a speicif music style, they were improvising around a root chord on a given style). 
+
+After exploring the data, I noticed that in the *solo* audio files, the musicians got a bit far from the instructed chord, compared to the *comp* audio files. 
+I narrowed down this dataset in the following way during the data processing phrase:
+- use only 'comp' audio tracks (180)
+- remove very under representated classes (all hdim and 7 chords)
+- keep only slices of audio where the chord played is *close enough* to the chord instructed
 
 ### The chords
-The data is composed of 180 audio samples containing the following chords:
-0  --> A#:7\
-1  --> A#:hdim7\
-2  --> A#:maj\
-3  --> A#:min\
-4  --> A:7\
-5  --> A:hdim7\
-6  --> A:maj\
-7  --> A:min\
-8  --> B:maj\
-9  --> B:min\
-10  --> C#:7\
-11  --> C#:hdim7\
-12  --> C#:maj\
-13  --> C#:min\
-14  --> C:7\
-15  --> C:hdim7\
-16  --> C:maj\
-17  --> C:min\
-18  --> D#:7\
-19  --> D#:maj\
-20  --> D#:min\
-21  --> D:7\
-22  --> D:maj\
-23  --> D:min\
-24  --> E:7\
-25  --> E:hdim7\
-26  --> E:maj\
-27  --> E:min\
-28  --> F#:7\
-29  --> F#:maj\
-30  --> F#:min\
-31  --> F:7\
-32  --> F:hdim7\
-33  --> F:maj\
-34  --> F:min\
-35  --> G#:7\
-36  --> G#:hdim7\
-37  --> G#:maj\
-38  --> G#:min\
-39  --> G:hdim7\
-40  --> G:maj\
-41  --> G:min\
+The chords that this model is capable of transcribing are the 24 most common chords:
+A:maj, A:min, A#:maj, A#:min\
+B:maj, B:min\
+C:maj, C:min, C#:maj, C#:min\
+D:maj, D:min, D#:maj, D#:min\
+E:maj, E:min\
+F:maj, F:min, F#:maj, F#:min\
+G:maj, G:min, G#:maj, G#:min\
 
-### The data
-This dataset consists of 360 audio files of approx. 30sec and annotations about the chord instructed to the player as well as the chord played (it differs slightly since the musicians had some leeway to fit a speicif music style.
-The dataset is composed of 180 tracks, each having one 'comp' audio file and one 'solo' audio file. I took only the 'comp' in this project to get cleaner images and because the musicians didn't go too far from what was instructed.
+### The image representations
+I used chomagrams CENS (Chroma Energy Normalized) using the [Librosa](https://librosa.org/doc/latest/index.html) pakage. This transformation smoothes out local deviations by taking statistics over large windows. It gave better performance for this particular dataset model because of the high variability around root chords in the dataset. 
+I also used the [magphase](https://librosa.org/doc/0.8.0/generated/librosa.magphase.html) transformation to de-noise images
 
-### The images
-I used chomagrams CENS : Chroma Energy Normalized using Librosa
+
+
 
 ## The model
  I used a CNN
