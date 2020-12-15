@@ -1,5 +1,6 @@
 # What the chord
 Chord predictor using a Convolutional Neural Network on image representations of audio\
+
 [![Issues](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/Isabelle-Dr/WhatTheChord/issues)
 
 ## About the project
