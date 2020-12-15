@@ -34,17 +34,14 @@ G:maj, G:min, G#:maj, G#:min\
 ### The image representations
 I used chomagrams CENS (Chroma Energy Normalized) using the [Librosa](https://librosa.org/doc/latest/index.html) pakage. This transformation smoothes out local deviations by taking statistics over large windows. It gave better performance for this particular dataset model because of the high variability around root chords in the dataset. 
 I also used the [magphase](https://librosa.org/doc/0.8.0/generated/librosa.magphase.html) transformation to de-noise images
-![alt text](https://github.com/Isabelle-Dr/WhatTheChord/blob/main/readme_images/cens.PNG?raw=true)
-
-
+![alt text](https://github.com/Isabelle-Dr/WhatTheChord/blob/main/readme_images/chromagrams.png?raw=true)
 
 ## The model
- I used a CNN
-
+ I used a Convolutional Neural network with two hidden layers and used Maxpooling layers.
+ 
 # Make a prediction
 ## Using the command line
-The model is trained on samples from audio data containing only one chord. The notes don't have to be played simultaneously :)\
-Make sure you are located in the folder containing the app.py file and the prediction folder
+Make sure the audio files you feed the model only contain a variation of one chord for best results.
 
 - Clone this repo\
 ``
@@ -59,25 +56,22 @@ $ source .venv/bin/activate\
 $ pip install -r requirements.txt
 ``
 - Make a prediction from the command line
-Put the audio files you want to predict in the `prediction` folder (.wav or .mp3). Then, run this command from the comand line. 
+Put the audio files you want to predict in the `prediction` folder (.wav or .mp3). There is already some files in that folder if you want to use them for prediction
+Then, run this command from the comand line (make sure you're situated in the `what-the-chord`directory)
 
 ``
-$ python -W ignore app.py <yourfilename.wav>
+$ python app.py <yourfilename.wav>
 ``
-
-The `W - ignore` is here so that the warnings aren't being printed out, it makes a cleaner output.
-Make sure you're situated in the `what-the-chord`directory.
 
 - That's it! You'll see the predicted chord right after this command :) In the prediciton folder, you'll also see the chromagram image of your song!
 
 ## Using the Streamlit app
-
-- Create a folder `streamlit` containing two sub folders `images` and `recording`
 - Run the following code\
 ``
 $ streamlit run streamlit.py
 ``
-- The webapp is launches in your browser. If not, you can open it at [http://localhost:8501](http://localhost:8501)
+- The webapp is now launched in your browser! If not, you can open it at [http://localhost:8501](http://localhost:8501)
+Play aorund with it, you can either record your own sample or upload a file.
 
 # Build the project from the source
 - Clone this repo\
@@ -92,30 +86,33 @@ $ virtualenv .venv\
 $ source .venv/bin/activate\
 $ pip install -r requirements.txt
 ``
-- Create three folders in the directory: `audio`, `annotation`, `images`, `labels`
-Your repo folder should have this structure:
+
+- Dowbload the [guitarset dataset](https://zenodo.org/record/1492449#.X8QhCGhKhPY), store all the audio files in the `audio` folder and the annotation files in the `annotation` folders under the `data_prepared` folder
+- run ` python data_extraction.py`
+It might take a while. You'll see chomagrams being created in the `data_prepared/images` folder, exciting!
+- run `python modeling.py`
+It might take 15-20min. After it, you're done! Your brand new model will be saved in the `pickles` folder, and it's ready for prediction!
+
+
+# Repo structure
 ```bash
 org/repo/
 ├── WhatTheChord/
-|           ├── annotation/
-|           ├── audio/
-|           ├── images/
-|           ├── labels/
-|           ├── prediction/
-|           ├── streamlit/
-|           |        └── images/
+|           ├── data_prepared/
+|           |        └── images/           # where chromagrams will be stored when running data_extraction.py
+|           ├── data_raw/          
+|           |        └── annotations/      # contains raw annotations data
+|           |        └── audio/            # contains raw audio data
+|           ├── readme_images/             # contains images used in the readme
+|           ├── pickles/                   # contains the model and label encoder files
+|           ├── temp_prediction/           # used to store audio files used for predictions from the command line
+|           ├── streamlit/                 
+|           |        └── images/           # images for the streamlit app background and the chromagram image
+|           ├── notebooks/
 |           ├── app.py
 |           ├── data_extraction.py
-|           ├── final_model.h5
-|           ├── labelencoder.sav
 |           ├── modeling.py
 |           ├── settings.py
 |           ├── streamlit.py
 |           └── requirements.txt
 ```
-
-- Dowbload the [guitarset dataset](https://zenodo.org/record/1492449#.X8QhCGhKhPY), store all the audio files in the `audio` folder and the annotation files in the `annotation` folder you just created
-- run ` python data_extraction.py`
-It might take a while. You'll see chomagrams being created in the images folder, exciting!
-- run `python modeling.py`
-It might take 15-20min. After it, you're done! Your brand new model will be saved as 'final_model.h5' and it's ready for prediction!
