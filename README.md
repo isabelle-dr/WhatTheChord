@@ -3,8 +3,8 @@ Chord predictor using a CNN on choma vectors
 
 ## About the project
 This project was part of LighthouseLabs data science bootcamp and took two weeks to complete. It consisted of:
-- research on audio transformations
-- get a dataset: (I used the [guitarset dataset](https://zenodo.org/record/1492449#.X8QhCGhKhPY)) 
+- research on audio transformation and manipulations in python
+- get a dataset with chord annotations
 - data processing
 - feature extraction of chromagrams from audio data
 - train deep learning model
@@ -34,7 +34,7 @@ G:maj, G:min, G#:maj, G#:min\
 ### The image representations
 I used chomagrams CENS (Chroma Energy Normalized) using the [Librosa](https://librosa.org/doc/latest/index.html) pakage. This transformation smoothes out local deviations by taking statistics over large windows. It gave better performance for this particular dataset model because of the high variability around root chords in the dataset. 
 I also used the [magphase](https://librosa.org/doc/0.8.0/generated/librosa.magphase.html) transformation to de-noise images
-
+![alt text](https://github.com/Isabelle-Dr/WhatTheChord/blob/main/readme_images/cens.PNG?raw=true)
 
 
 
