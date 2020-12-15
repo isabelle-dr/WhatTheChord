@@ -1,5 +1,5 @@
 # What the chord
-Chord predictor using a CNN on choma vectors
+Chord predictor using a Convolutional Neural Network on image representations of audio
 
 ## About the project
 This project was part of LighthouseLabs data science bootcamp and took two weeks to complete. It consisted of:
