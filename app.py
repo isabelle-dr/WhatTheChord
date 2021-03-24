@@ -1,4 +1,4 @@
-# This is used to make predictions fromt he command line
+# This is used to make predictions from the command line
 
 import pandas as pd
 import numpy as np
