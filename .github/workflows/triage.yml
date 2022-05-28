@@ -17,7 +17,7 @@ jobs:
       - name: Comment issue
         uses: actions/github-script@v4
         with:
-          github-token: ${{secrets.GHPROJECT_TOKEN}}
+          github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
             github.issues.createComment({
               issue_number: context.issue.number,
