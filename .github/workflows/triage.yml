@@ -9,8 +9,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: create card
-      - uses: alex-page/github-project-automation-plus@v0.8.1
+        uses: alex-page/github-project-automation-plus@v0.8.1
         with:
           project: Bug triage
           column: Requires Investigation
           repo-token: ${{ secrets.GHPROJECT_TOKEN }}
+      - name: Comment issue
+        uses: actions/github-script@v4
+        with:
+          github-token: ${{secrets.GHPROJECT_TOKEN}}
+          script: |
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: "Thank you for your reporting a bug. The issue has been placed in [triage](https://github.com/MobilityData/gtfs-validator/projects/1), the MobilityData team will follow-up on it."
+            })
