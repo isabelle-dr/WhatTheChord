@@ -11,5 +11,5 @@ jobs:
       - uses: alex-page/github-project-automation-plus@v0.8.1
         with:
           project: Bug triage
-          column: Requires Investigaiton
+          column: Requires Investigation
           repo-token: ${{ secrets.GHPROJECT_TOKEN }}
