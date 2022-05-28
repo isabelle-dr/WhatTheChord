@@ -13,7 +13,7 @@ jobs:
         with:
           project: Bug triage
           column: Requires Investigation
-          repo-token: ${{ secrets.GITHUB_TOKEN}}
+          repo-token: ${{ secrets.GHPROJECT_TOKEN}}
       - name: Comment issue
         uses: actions/github-script@v4
         with:
